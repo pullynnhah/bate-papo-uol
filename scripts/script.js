@@ -214,7 +214,7 @@ const peopleIcon = mainPage.querySelector("header ion-icon");
 const aside = mainPage.querySelector("aside");
 const closeAside = mainPage.querySelector("aside .close");
 const visibilities = mainPage.querySelectorAll("aside .visibilities .option");
-console.log(visibilities);
+
 loginBtn.addEventListener("click", login);
 loginInput.addEventListener("keypress", e => {
   if (e.key === "Enter") {
