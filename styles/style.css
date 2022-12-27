@@ -5,6 +5,59 @@ body {
   background: #f3f3f3;
 }
 
+.main-page,
+.login-page {
+  display: none;
+}
+
+.main-page.active,
+.login-page.active {
+  display: initial;
+}
+
+.login-page.active {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  background: #fff;
+}
+
+.login-page img {
+  width: 130px;
+  height: 92px;
+  margin: 80px 0 120px;
+}
+
+.login-page input {
+  width: 261px;
+  height: 54px;
+  border: 1px solid #d7d7d7;
+  border-radius: 4px;
+  text-align: center;
+
+  font-size: 18px;
+  line-height: 25px;
+}
+
+.login-page input::placeholder {
+  color: #aeaeae;
+  opacity: 1;
+}
+
+.login-page button {
+  width: 109px;
+  height: 45px;
+  background: #e7e7e7;
+  border-radius: 9px;
+
+  font-size: 18px;
+  line-height: 25px;
+  color: #696969;
+  text-align: center;
+}
 header {
   width: 100vw;
   height: 80px;
@@ -67,6 +120,10 @@ main p {
 }
 
 aside {
+  display: none;
+}
+
+aside.open {
   width: 100vw;
   height: 100vh;
 
