@@ -2,6 +2,7 @@
 
 body {
   font-family: "Roboto", sans-serif;
+  background: #f3f3f3;
 }
 
 header {
@@ -30,12 +31,46 @@ header ion-icon {
   font-size: 45px;
 }
 
+main {
+  margin: 106px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+main p {
+  font-size: 14px;
+  line-height: 16px;
+
+  padding: 12px 8px;
+  border-radius: 2px;
+}
+
+.status {
+  background: #dcdcdc;
+}
+
+.message {
+  background: #fff;
+}
+
+.private {
+  background: #ffdede;
+}
+.time {
+  color: #aaa;
+}
+
+.from,
+.to {
+  font-weight: 700;
+}
 footer {
   width: 100vw;
   height: 80px;
 
   display: flex;
-  gap: 20px;
+  gap: 5px;
   align-items: center;
 
   padding: 0 22px;
