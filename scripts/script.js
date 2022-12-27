@@ -12,6 +12,7 @@ function login() {
       mainPage.classList.add("active");
       setTimeout(keepLogin, 5000);
       getMessages();
+      loadParticipants();
     })
     .catch(() => {
       loading.classList.add("hide");
@@ -109,6 +110,76 @@ function reload() {
   window.location.reload();
 }
 
+function loadParticipants() {
+  const promise = axios.get(`${URI}/participants`);
+  participants.innerHTML = "";
+  promise
+    .then(response => {
+      const people = response.data;
+
+      let hasActive = false;
+      people.forEach(person => {
+        if (!hasActive && person.name === sendMessage.to) {
+          hasActive = true;
+        }
+        const cls = person.name === sendMessage.to ? "option active" : "option";
+
+        participants.innerHTML += `
+      <div class="${cls}" onclick="selectParticipant(this)">
+        <ion-icon name="person-circle"></ion-icon>
+        <p>${person.name}</p>
+        <img src="./assets/check.svg" alt="checkmark" />
+      </div>
+      `;
+      });
+
+      const cls = !hasActive ? "option active" : "option";
+      participants.innerHTML =
+        `
+        <div class="${cls}" onclick="selectParticipant(this)">
+          <ion-icon name="people"></ion-icon>
+          <p>Todos</p>
+          <img src="./assets/check.svg" alt="checkmark" />
+        </div>
+      ` + participants.innerHTML;
+      if (!hasActive) {
+        sendMessage.to = "Todos";
+        sendMessage.type = "message";
+      }
+      setTimeout(loadParticipants, 10000);
+    })
+    .catch(reload);
+}
+
+function selectParticipant(participant) {
+  const active = participants.querySelector(".active");
+  if (active) {
+    active.classList.remove("active");
+  }
+  participant.classList.add("active");
+  sendMessage.to = participant.querySelector("p").textContent;
+  sendTo.textContent =
+    sendMessage.type === "message"
+      ? sendMessage.to
+      : `${sendMessage.to} (Reservadamente)`;
+}
+
+function selectVisibility(visibility) {
+  const active = visibilities.querySelector(".active");
+  if (active) {
+    active.classList.remove("active");
+  }
+
+  visibility.classList.add("active");
+
+  const isPublic = visibility.querySelector("p").textContent === "Público";
+  sendMessage.type = isPublic ? "message" : "private_message";
+}
+
+function showAside() {
+  aside.classList.add("open");
+}
+
 const sendMessage = {
   from: null,
   to: "Todos",
@@ -132,6 +203,11 @@ const main = mainPage.querySelector("main");
 const mainInput = mainPage.querySelector("input");
 const sendBtn = mainPage.querySelector("button");
 const sendTo = mainPage.querySelector(".send-to");
+const participants = mainPage.querySelector(".participants");
+const peopleIcon = mainPage.querySelector("header ion-icon");
+const aside = mainPage.querySelector("aside");
+const closeAside = mainPage.querySelector("aside .close");
+const visibilities = mainPage.querySelector("aside .visibilities");
 
 loginBtn.addEventListener("click", login);
 loginInput.addEventListener("keypress", e => {
@@ -148,3 +224,6 @@ mainInput.addEventListener("keypress", e => {
     sendBtn.click();
   }
 });
+
+peopleIcon.addEventListener("click", showAside);
+closeAside.addEventListener("click", () => aside.classList.remove("open"));

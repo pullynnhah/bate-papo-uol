@@ -193,6 +193,14 @@ aside .option {
   padding: 5px 18px;
 }
 
+aside img {
+  display: none;
+}
+
+aside .active img {
+  display: initial;
+}
+
 aside p {
   margin-right: auto;
 }
