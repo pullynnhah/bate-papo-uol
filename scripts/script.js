@@ -47,9 +47,9 @@ function canRead(message) {
 }
 
 function renderMessages(messages) {
-  const htmlMessages = messages.map(formatMessage);
-  main.innerHTML = "";
-  htmlMessages.forEach(message => (main.innerHTML += message));
+  main.innerHTML = messages
+    .map(formatMessage)
+    .reduce((ac, message) => ac + message);
   const lastP = main.querySelector("p:last-child");
   lastP.scrollIntoView();
 }
@@ -125,12 +125,12 @@ function loadParticipants() {
         const cls = person.name === sendMessage.to ? "option active" : "option";
 
         participants.innerHTML += `
-      <div class="${cls}" onclick="selectParticipant(this)">
-        <ion-icon name="person-circle"></ion-icon>
-        <p>${person.name}</p>
-        <img src="./assets/check.svg" alt="checkmark" />
-      </div>
-      `;
+        <div class="${cls}" onclick="selectParticipant(this)">
+          <ion-icon name="person-circle"></ion-icon>
+          <p>${person.name}</p>
+          <img src="./assets/check.svg" alt="checkmark" />
+        </div>
+        `;
       });
 
       const cls = !hasActive ? "option active" : "option";
