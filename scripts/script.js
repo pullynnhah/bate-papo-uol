@@ -125,7 +125,7 @@ function loadParticipants() {
         const cls = person.name === sendMessage.to ? "option active" : "option";
 
         participants.innerHTML += `
-        <div class="${cls}" onclick="selectParticipant(this)">
+        <div class="${cls}">
           <ion-icon name="person-circle"></ion-icon>
           <p>${person.name}</p>
           <img src="./assets/check.svg" alt="checkmark" />
@@ -136,7 +136,7 @@ function loadParticipants() {
       const cls = !hasActive ? "option active" : "option";
       participants.innerHTML =
         `
-        <div class="${cls}" onclick="selectParticipant(this)">
+        <div class="${cls}">
           <ion-icon name="people"></ion-icon>
           <p>Todos</p>
           <img src="./assets/check.svg" alt="checkmark" />
@@ -146,6 +146,13 @@ function loadParticipants() {
         sendMessage.to = "Todos";
         sendMessage.type = "message";
       }
+
+      const participantsDiv = participants.querySelectorAll(".option");
+      participantsDiv.forEach(participant =>
+        participant.addEventListener("click", () =>
+          selectParticipant(participant)
+        )
+      );
       setTimeout(loadParticipants, 10000);
     })
     .catch(reload);
@@ -165,10 +172,9 @@ function selectParticipant(participant) {
 }
 
 function selectVisibility(visibility) {
-  const active = visibilities.querySelector(".active");
-  if (active) {
-    active.classList.remove("active");
-  }
+  visibilities.forEach(vis => {
+    if (vis.classList.contains("active")) vis.classList.remove("active");
+  });
 
   visibility.classList.add("active");
 
@@ -207,8 +213,8 @@ const participants = mainPage.querySelector(".participants");
 const peopleIcon = mainPage.querySelector("header ion-icon");
 const aside = mainPage.querySelector("aside");
 const closeAside = mainPage.querySelector("aside .close");
-const visibilities = mainPage.querySelector("aside .visibilities");
-
+const visibilities = mainPage.querySelectorAll("aside .visibilities .option");
+console.log(visibilities);
 loginBtn.addEventListener("click", login);
 loginInput.addEventListener("keypress", e => {
   if (e.key === "Enter") {
@@ -227,3 +233,6 @@ mainInput.addEventListener("keypress", e => {
 
 peopleIcon.addEventListener("click", showAside);
 closeAside.addEventListener("click", () => aside.classList.remove("open"));
+visibilities.forEach(visibility =>
+  visibility.addEventListener("click", () => selectVisibility(visibility))
+);
