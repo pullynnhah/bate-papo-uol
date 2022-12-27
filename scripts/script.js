@@ -1,9 +1,9 @@
 const URI = "https://mock-api.driven.com.br/api/v6/uol";
 
 function login() {
-  user.name = loginInput.value;
+  sendMessage.from = loginInput.value;
 
-  const promise = axios.post(`${URI}/participants`, user);
+  const promise = axios.post(`${URI}/participants`, { name: sendMessage.from });
   loading.classList.remove("hide");
   loginDiv.classList.add("hide");
   promise
@@ -21,7 +21,7 @@ function login() {
 }
 
 function keepLogin() {
-  const promise = axios.post(`${URI}/status`, user);
+  const promise = axios.post(`${URI}/status`, { name: sendMessage.from });
   promise.then(() => setTimeout(keepLogin, 5000)).catch(reload);
 }
 
@@ -34,15 +34,15 @@ function getMessages() {
         renderMessages(messages);
         lastMessage = messages.at(-1);
       }
-      setTimeout(getMessages, 3000);
+      timeout = setTimeout(getMessages, 3000);
     })
-    .catch(err => console.log(err));
+    .catch(reload);
 }
 
 function canRead(message) {
   if (message.type !== "private_message") return true;
-  if (message.from === user.name) return true;
-  return message.to === user.name;
+  if (message.from === sendMessage.from) return true;
+  return message.to === sendMessage.from;
 }
 
 function renderMessages(messages) {
@@ -92,12 +92,32 @@ function isNewMessages(message) {
   return false;
 }
 
+function submitMessage() {
+  sendMessage.text = mainInput.value;
+  console.log(sendMessage.text);
+  const promise = axios.post(`${URI}/messages`, sendMessage);
+  promise
+    .then(() => {
+      clearTimeout(timeout);
+      mainInput.value = "";
+      getMessages();
+    })
+    .catch(err => console.log(err));
+}
+
 function reload() {
   window.location.reload();
 }
-// variables
-const user = { name: null };
-let lastMessage = null;
+
+const sendMessage = {
+  from: null,
+  to: "Todos",
+  text: null,
+  type: "message",
+};
+
+let lastMessage;
+let timeout;
 
 // login-page elements
 const loginPage = document.querySelector(".login-page");
@@ -109,11 +129,22 @@ const loading = loginPage.querySelector(".loading");
 // main-page elements
 const mainPage = document.querySelector(".main-page");
 const main = mainPage.querySelector("main");
+const mainInput = mainPage.querySelector("input");
+const sendBtn = mainPage.querySelector("button");
+const sendTo = mainPage.querySelector(".send-to");
 
 loginBtn.addEventListener("click", login);
 loginInput.addEventListener("keypress", e => {
   if (e.key === "Enter") {
     e.preventDefault();
     loginBtn.click();
+  }
+});
+
+sendBtn.addEventListener("click", submitMessage);
+mainInput.addEventListener("keypress", e => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    sendBtn.click();
   }
 });
