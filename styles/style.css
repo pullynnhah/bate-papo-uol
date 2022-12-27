@@ -21,14 +21,43 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+  gap: 120px;
+  padding: 72px 0;
   background: #fff;
 }
 
-.login-page img {
+.login-page .login img {
   width: 130px;
   height: 92px;
-  margin: 80px 0 120px;
+}
+
+.login-page div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.login-page .login.hide,
+.login-page .loading.hide {
+  display: none;
+}
+
+.login p {
+  display: none;
+}
+
+.loading p {
+  color: #b95842;
+}
+
+.login.error p {
+  display: initial;
+  color: #c40303;
+}
+
+.login.error input {
+  border: 1px solid #c40303;
 }
 
 .login-page input {
@@ -58,6 +87,7 @@ body {
   color: #696969;
   text-align: center;
 }
+
 header {
   width: 100vw;
   height: 80px;
