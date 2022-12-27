@@ -103,7 +103,7 @@ function submitMessage() {
       mainInput.value = "";
       getMessages();
     })
-    .catch(err => console.log(err));
+    .catch(reload);
 }
 
 function reload() {
