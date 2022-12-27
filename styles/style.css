@@ -65,6 +65,55 @@ main p {
 .to {
   font-weight: 700;
 }
+
+aside {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  z-index: 1;
+}
+
+aside .close {
+  width: 32vw;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+aside .selection {
+  width: 68vw;
+  background: #fff;
+}
+
+aside h2 {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+aside .option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 18px;
+}
+
+aside p {
+  margin-right: auto;
+}
+
+aside ion-icon {
+  font-size: 25px;
+}
+
 footer {
   width: 100vw;
   height: 80px;
