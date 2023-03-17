@@ -58,13 +58,13 @@ main {
   margin: 106px 0;
 }
 
-ul {
+main ul {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-li {
+main li {
   width: 100%;
   padding: 12px 8px;
   border-radius: 2px;
@@ -92,6 +92,76 @@ li {
 .from,
 .to {
   font-weight: 700;
+}
+
+aside {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+aside .close {
+  width: 40%;
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.6);
+}
+
+aside .side-menu {
+  width: 60%;
+  height: 100%;
+  background: #fff;
+  margin: 24px 0;
+}
+
+h2 {
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.contacts ion-icon {
+  font-size: 25px;
+}
+
+aside ul {
+  margin: 36px 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+aside li {
+  padding: 0 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+aside p {
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.check {
+  margin-left: auto;
+  opacity: 0;
+}
+
+.selected .check {
+  opacity: 1;
+}
+.visibility ion-icon {
+  font-size: 22px;
 }
 
 footer p {
