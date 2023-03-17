@@ -88,23 +88,6 @@ header ion-icon {
   font-size: 45px;
 }
 
-footer {
-  bottom: 0;
-  gap: 14px;
-}
-
-footer div {
-  flex-grow: 1;
-}
-
-main input {
-  width: 100%;
-}
-
-main input::placeholder {
-  font-style: italic;
-}
-
 main {
   margin: 106px 0;
 }
@@ -144,6 +127,10 @@ main li {
 .from,
 .to {
   font-weight: 700;
+}
+
+aside:empty {
+  display: none;
 }
 
 aside {
@@ -215,6 +202,23 @@ aside p {
 
 .visibility ion-icon {
   font-size: 22px;
+}
+
+footer {
+  bottom: 0;
+  gap: 14px;
+}
+
+footer div {
+  flex-grow: 1;
+}
+
+footer input {
+  width: 100%;
+}
+
+footer input::placeholder {
+  font-style: italic;
 }
 
 footer p {
