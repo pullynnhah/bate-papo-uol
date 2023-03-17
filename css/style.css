@@ -54,6 +54,46 @@ input::placeholder {
   font-style: italic;
 }
 
+main {
+  margin: 106px 0;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+li {
+  width: 100%;
+  padding: 12px 8px;
+  border-radius: 2px;
+
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.status-message {
+  background: #dcdcdc;
+}
+
+.message {
+  background: #fff;
+}
+
+.private-message {
+  background: #ffdede;
+}
+
+.time {
+  color: #aaa;
+}
+
+.from,
+.to {
+  font-weight: 700;
+}
+
 footer p {
   font-size: 14px;
   line-height: 25px;
