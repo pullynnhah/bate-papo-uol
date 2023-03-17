@@ -58,6 +58,7 @@ button {
   text-align: center;
   color: #696969;
 }
+
 .header-footer {
   width: 100vw;
   height: 80px;
@@ -121,6 +122,7 @@ main li {
 
   font-size: 14px;
   line-height: 16px;
+  /* TODO: add word-break so big word not mess up layout */
 }
 
 .status-message {
