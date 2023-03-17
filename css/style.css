@@ -5,7 +5,7 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
-header {
+.header-footer {
   width: 100vw;
   height: 80px;
   padding: 0 6%;
@@ -16,10 +16,13 @@ header {
 
   position: fixed;
   left: 0;
-  top: 0;
 
   background: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+header {
+  top: 0;
 }
 
 header img {
@@ -29,4 +32,35 @@ header img {
 
 header ion-icon {
   font-size: 45px;
+}
+
+footer {
+  bottom: 0;
+  gap: 14px;
+}
+
+footer div {
+  flex-grow: 1;
+}
+
+input {
+  width: 100%;
+  font-size: 18px;
+  line-height: 25px;
+}
+
+input::placeholder {
+  opacity: 1;
+  font-style: italic;
+}
+
+footer p {
+  font-size: 14px;
+  line-height: 25px;
+  font-weight: 300;
+  color: #505050;
+}
+
+footer ion-icon {
+  font-size: 26px;
 }
