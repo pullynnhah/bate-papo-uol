@@ -1,5 +1,32 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;1,400&display=swap");
 
 body {
+  background: #f3f3f3;
   font-family: "Roboto", sans-serif;
+}
+
+header {
+  width: 100vw;
+  height: 80px;
+  padding: 0 6%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  background: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+header img {
+  width: 75px;
+  height: 53px;
+}
+
+header ion-icon {
+  font-size: 45px;
 }
