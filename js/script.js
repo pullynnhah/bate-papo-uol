@@ -23,13 +23,14 @@ function login() {
 
   axios
     .post(`${API_URL}/participants`, { name })
-    .catch(err => alert("Usuário já está em uso!"))
     .then(res => {
+      console.log("HELLO");
       message.from = name;
       renderApp();
       getMessages();
       setTimeout(keepConnection, 5000);
-    });
+    })
+    .catch(err => alert("Usuário já está em uso!"));
 }
 
 function keepConnection() {
@@ -56,21 +57,29 @@ function renderApp() {
         Enviando para <span class="receiver"></span> <span class="mode"></span>
       </p>
     </div>
-    <ion-icon name="paper-plane-outline"></ion-icon>
+    <ion-icon onclick="submitMessage()" name="paper-plane-outline"></ion-icon>
   </footer>
 `;
+
+  const icon = document.querySelector("ion-icon");
+  document.querySelector("input").addEventListener("keypress", e => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      icon.click();
+    }
+  });
 }
 
 function getMessages() {
   axios
     .get(`${API_URL}/messages`)
-    .catch(err => window.location.reload())
     .then(res => {
       const messages = res.data.filter(isMessageVisible);
       lastMessage = messages.at(-1);
       if (!compareMessages(lastMessage, lastRenderMessage)) renderMessages(messages);
-      setTimeout(getMessages, 3000);
-    });
+      timeout = setTimeout(getMessages, 3000);
+    })
+    .catch(err => window.location.reload());
 }
 
 function compareMessages(msg1, msg2) {
@@ -120,6 +129,19 @@ function renderMessages(messages) {
   document.querySelector("main li:last-child").scrollIntoView();
 }
 
+function submitMessage() {
+  const input = document.querySelector("footer input");
+  message.text = input.value;
+  axios
+    .post(`${API_URL}/messages`, message)
+    .then(res => {
+      clearTimeout(timeout);
+      input.value = "";
+      getMessages();
+    })
+    .catch(err => alert("Mensagem não pode estar vazia!"));
+}
+
 const API_URL = "https://mock-api.driven.com.br/api/v6/uol";
 const root = document.querySelector("#root");
 
@@ -135,3 +157,5 @@ const message = {
 
 let lastRenderMessage = {};
 let lastMessage;
+
+let timeout;
