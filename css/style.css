@@ -105,7 +105,6 @@ main li {
 
   font-size: 14px;
   line-height: 16px;
-  /* TODO: add word-break so big word not mess up layout */
 }
 
 .status-message {
